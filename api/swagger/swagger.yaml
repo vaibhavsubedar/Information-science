@@ -1,0 +1,612 @@
+swagger: "2.0"
+info:
+  version: "0.0.5"
+  title: "Information science"
+  description: "This is Information science branch endpoints, which provides all functionality details."
+  termsOfService: http://ironbits.github.io
+  contact:
+    name: Ironbits
+    email: ironbits.io@gmail.com
+    url: http://ironbits.github.io
+  license:
+    name: "All Source Code rights belongs to Ironbits." 
+# during dev, should point to your local machine
+host: localhost:10019
+# basePath prefixes all resource paths 
+basePath: /informationscience/api
+#
+tags:
+  - name: "Information science"
+    description: "Endpoints of all functionalities belongs to Information Science branch"
+    externalDocs:
+      description: "Find out more"
+      url: "http://ironbits.github.io"
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+definitions:
+ 
+  commonResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        description: Response Message
+       
+  dateTimeSub:
+    type: object
+    description: Data to store
+    required:
+      - date
+      - subject    
+    properties:
+      date:
+        type: string
+        description: Date
+      subject:
+        type: string
+        description: Subject
+        
+  internalExamTimeTables:
+    description: Data to store
+    required:
+      - semester           
+    properties:
+      semester:
+        type: string
+        description: Internals Date
+      dateTimeSub:
+        type: array
+        description: Date Description
+        items:
+          $ref: "#/definitions/dateTimeSub"
+
+  externalexamdetails:
+    type: object
+    description: Data to store
+    required:
+      - date
+      - subject    
+    properties:
+      date:
+        type: string
+        description: Date
+      subject:
+        type: string
+        description: Subject
+        
+  externalExamTimeTable:
+    description: Data to store
+    required:
+      - semester           
+    properties:
+      semester:
+        type: string
+        description: Internals Date
+      externalexamdetails:
+        type: array
+        description: Date Description
+        items:
+          $ref: "#/definitions/externalexamdetails"
+
+        
+  tenthmarks:
+    type: object
+    description: Data to store
+    required:
+      - yop
+      - aggregate
+      - board
+    properties:
+      yop:
+        type: number
+        description: tenth year of passing
+      aggregate:
+        type: number
+        description: tenth marks
+      board:
+        type: string
+        description: tenth marks
+        
+  pucmarks:
+    type: object
+    description: Data to store
+    required:
+      - yop
+      - aggregate
+      - board
+    properties:
+      yop:
+        type: number
+        description: puc year of passing
+      aggregate:
+        type: number
+        description: puc marks
+      board:
+        type: string
+        description: puc marks
+        
+  diplomamarks:
+    type: object
+    description: Data to store
+    required:
+      - yop
+      - aggregate
+      - board
+    properties:
+      yop:
+        type: number
+        description: diploma year of passing
+      aggregate:
+        type: number
+        description: diploma marks
+      board:
+        type: string
+        description: diploma marks
+        
+  engineeringmarks:
+    type: object
+    description: Data to store
+    required:
+      - firstsem
+      - secondsem
+      - thirdsem
+      - fourthsem
+      - fifthsem
+      - sixthsem
+      - seventhsem
+      - eighthsem
+    properties:
+      firstsem:
+        type: number
+        description: first sem marks
+      secondsem:
+        type: number
+        description: second sem marks
+      thirdsem:
+        type: number
+        description: third sem marks
+      fourthsem:
+        type: number
+        description: fourth sem marks
+      fifthsem:
+        type: number
+        description: fifth sem marks
+      sixthsem:
+        type: number
+        description: sixth sem marks
+      seventhsem:
+        type: number
+        description: seventh sem marks
+      eighthsem:
+        type: number
+        description: eighth sem marks
+        
+  marksdetails:
+    description: Data to store
+    required:      
+      - currentaggreegate
+    properties:
+      tenthmarks:    
+          $ref: "#/definitions/tenthmarks"
+      pucmarks:       
+          $ref: "#/definitions/pucmarks"
+      diplomamarks:       
+          $ref: "#/definitions/diplomamarks"
+      engineeringmarks:      
+          $ref: "#/definitions/engineeringmarks"
+      currentaggreegate:
+        type: number
+        description: Engineering aggregate
+        
+  fatherdetails:
+    type: object
+    description: Data to store
+    required:
+      - name
+      - dob
+      - contactno
+      - email
+    properties:
+      name:
+        type: string
+        description: Father name
+      dob:
+        type: string
+        format: date-time
+        description: Father DOB
+      contactno:
+        type: number
+        description: Father phone number
+      email:
+        type: string
+        description: Father email
+        
+  personaldetails:
+    type: object
+    description: Data to store
+    required:
+      - firstname
+      - lastname
+      - fullname
+      - dob
+      - gender
+      - contactno
+      - email      
+    properties:
+      firstname:
+        type: string
+        description: First name
+      lastname:
+        type: string
+        description: Last name
+      fullname:
+        type: string
+        description: Full name
+      dob:
+        type: string
+        format: date-time
+        description: DOB
+      gender:
+        type: string
+        description: Gender
+      contactno:
+        type: number
+        description: Phone number
+      email:
+        type: string
+        description: Email
+      fatherdetails:    
+         $ref: "#/definitions/fatherdetails"
+
+  otherdetails:
+    type: object
+    description: Data to store
+    required:
+      - yearofjoining
+      - currentaddress
+      - permanentaddress
+      - seattype
+      - entranceexamrank
+      - religion
+      - caste
+    properties:
+      yearofjoining:
+        type: number
+        description: Year of joining
+      currentaddress:
+        type: string
+        description: Current address
+      permanentaddress:
+        type: string
+        description: Permanent address
+      seattype:
+        type: string
+        description: Seat type
+      entranceexamrank:
+        type: number
+        description: Entrance exam rank
+      religion:
+        type: string
+        description: Religion
+      caste:
+        type: number
+        description: Caste
+        
+  infoSchema:
+    description: Data to store
+    required:
+      - branch
+      - semester
+      - usn  
+    properties:
+      branch:
+        type: string
+        description: Engineering branch
+      semester:
+        type: string
+        description: Semester
+      usn:
+        type: string
+        description: usn
+      personaldetails:       
+          $ref: "#/definitions/personaldetails"
+      marksdetails:    
+          $ref: "#/definitions/marksdetails"
+      otherdetails:   
+          $ref: "#/definitions/otherdetails"
+ 
+
+
+paths:
+ 
+  /internalstimetable:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: internalstimetable
+    post:
+      tags:
+      - "Internals Timetable"
+      summary: "Internals Exam Timetable"
+      description: "Internals Exam Timetable"
+      operationId: internalstimetable
+      parameters:
+        - name: name
+          in: body
+          description: Save Internals Exam Timetable
+          required: true
+          schema:
+            $ref: "#/definitions/internalExamTimeTables"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/commonResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listalltimetable:
+    x-swagger-router-controller: internalstimetable
+    get:
+      tags:
+      - "Internals Timetable"
+      summary: Returns All Semester Internals Exam Timetable
+      description: List Of Internals Time table of All Semesters
+      operationId: listalltimetable
+      parameters: []
+      responses:
+        "200":
+          description: Internals Timetable Of All Semester
+          schema:
+            $ref: "#/definitions/internalExamTimeTables"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listbysemester/{semester}:
+    x-swagger-router-controller: internalstimetable
+    get:
+      tags:
+      - "Internals Timetable"
+      summary: Returns Timetable To a Specific Semester
+      description: List Of Internals Timetable For a Specific Semester
+      operationId: listbysemester
+      parameters:
+        - name: semester
+          in: path
+          description: Specific Semester Of Branch
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Internals Timetable Of Specific Semester
+          schema:
+            $ref: "#/definitions/internalExamTimeTables"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /externalstimetable:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: externalstimetable
+    post:
+      tags:
+      - "Externals Timetable"
+      summary: "Externals Exam Timetable"
+      description: "Externals Exam Timetable"
+      operationId: externalstimetable
+      parameters:
+        - name: name
+          in: body
+          description: Save Externals Exam Timetable
+          required: true
+          schema:
+            $ref: "#/definitions/externalExamTimeTable"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/commonResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listallexternalexam:
+    x-swagger-router-controller: externalstimetable
+    get:
+      tags:
+      - "Externals Timetable"
+      summary: Returns All Semester Externals Exam Timetable
+      description: List Of Externals Time table of All Semesters
+      operationId: listallexternalexam
+      parameters: []
+      responses:
+        "200":
+          description: Externals Timetable Of All Semester
+          schema:
+            $ref: "#/definitions/externalExamTimeTable"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listexternalsbysemester/{semester}:
+    x-swagger-router-controller: externalstimetable
+    get:
+      tags:
+      - "Externals Timetable"
+      summary: Returns Externals Exam Timetable To a Specific Semester
+      description: List Of Externals Exam Timetable For a Specific Semester
+      operationId: listexternalsbysemester
+      parameters:
+        - name: semester
+          in: path
+          description: Specific Semester Of Branch
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Externals Timetable Of Specific Semester
+          schema:
+            $ref: "#/definitions/externalExamTimeTable"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+            
+  /info:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: info
+    post:
+      tags:
+      - "Student Info"
+      summary: "Save Student Details"
+      description: "Save Student Details"
+      operationId: info
+      parameters:
+        - name: name
+          in: body
+          description: Save Student Information
+          required: true
+          schema:
+            $ref: "#/definitions/infoSchema"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/commonResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listallinfo:
+    x-swagger-router-controller: info
+    get:
+      tags:
+      - "Student Info"
+      summary: Returns All Student Information
+      description: List Of Details of All students
+      operationId: listallinfo
+      parameters: []
+      responses:
+        "200":
+          description: All Student Information
+          schema:
+            $ref: "#/definitions/infoSchema"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listbyspecificbranch/{branch}:
+    x-swagger-router-controller: info
+    get:
+      tags:
+      - "Student Info"
+      summary: Returns Student Information For Specific Branch
+      description: List Of Student Information For a Specific Branch
+      operationId: listbyspecificbranch
+      parameters:
+        - name: branch
+          in: path
+          description: Specific Branch
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Student Information Of Specific Branch
+          schema:
+            $ref: "#/definitions/infoSchema"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listbyspecificsemester/{semester}:
+    x-swagger-router-controller: info
+    get:
+      tags:
+      - "Student Info"
+      summary: Returns Student Information For Specific Semester
+      description: List Of Student Information For a Specific Semester
+      operationId: listbyspecificsemester
+      parameters:
+        - name: semester
+          in: path
+          description: Specific Semester
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Student Information Of Specific Semester
+          schema:
+            $ref: "#/definitions/infoSchema"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /listbyspecificusn/{usn}:
+    x-swagger-router-controller: info
+    get:
+      tags:
+      - "Student Info"
+      summary: Returns Student Information For Specific USN
+      description: List Of Student Information For a Specific USN
+      operationId: listbyspecificusn
+      parameters:
+        - name: usn
+          in: path
+          description: Specific USN
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Student Information Of Specific USN
+          schema:
+            $ref: "#/definitions/infoSchema"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/commonResponse"
+
+  /uploadstudentinfo:
+    x-swagger-router-controller: info
+    post:
+      tags:
+      - "Student Info"
+      summary: Upload Student Information
+      description: Upload Student Information
+      operationId: uploadstudentinfo
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: file
+          in: formData
+          description: 'Student Info Details'
+          required: true
+          type: file        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/infoSchema"
+      description: 'Student Info'
+     
+ 
+  /swagger:
+    x-swagger-pipe: swagger_raw
