@@ -15,7 +15,7 @@
     "mongoose": "^5.0.12",
     "nconf": "^0.10.0",
     "swagger-tools": "^0.10.3",
-    "xlsx": "^0.14.3",
+    "xlsx": "^0.17.0",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
